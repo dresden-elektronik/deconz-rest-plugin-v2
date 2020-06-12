@@ -1,2 +1,2 @@
-# deconz-rest-plugin-v2
-deCONZ REST-API version 2 development repository.
+# Introduction
+This is a development repository for the new deCONZ REST-API version 2.
