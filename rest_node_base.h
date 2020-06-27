@@ -89,6 +89,30 @@ public:
     const std::vector<NodeValue> &zclValues() const;
     const QDateTime &lastRx() const;
     void rx();
+    
+    // APIv2
+    uint16_t nwkv2() const;
+    uint64_t extv2() const;
+    void setManufacturerv2(const QString &manufacturer);
+    void setModelIdv2(const QString &modelid);
+    void setDateCodev2(const QString &datecode);
+    void setSwVersionv2(const QString &swversion);
+    const QString &manufacturerv2() const;
+    const QString &modelIdv2() const;
+    const QString &dateCodev2() const;
+    const QString &swVersionv2() const;
+    bool isCoordinatorv2() const;
+    bool isRouterv2() const;
+    bool isEndDevicev2() const;
+    bool isZombiev2() const;
+    const std::vector<uint8_t> &endpointsv2() const;
+    const QList<deCONZ::SimpleDescriptor> &simpleDescriptorsv2() const;
+    const deCONZ::MacCapabilities &macCapabilitiesv2() const;
+    const deCONZ::PowerDescriptor &powerDescriptorv2() const;
+    bool debugNode() const;
+    void setDebugNode(bool nodeEnabled);
+    bool debugAll() const;
+    void setDebugAll(bool allEnabled);
 
 private:
     deCONZ::Node *m_node;
@@ -107,6 +131,14 @@ private:
     NodeValue m_invalidValue;
     std::vector<NodeValue> m_values;
     QTime m_invalidTime;
+    
+    // APIv2
+    QString m_manufacturer;
+    QString m_model;
+    QString m_datecode;
+    QString m_sw_version;
+    bool m_debugNode;
+    bool m_debugAll;
 };
 
 #endif // REST_NODE_BASE_H

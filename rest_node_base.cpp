@@ -19,7 +19,13 @@ RestNodeBase::RestNodeBase() :
     m_needSaveDatabase(false),
     m_read(0),
     m_lastRead(0),
-    m_lastAttributeReportBind(0)
+    m_lastAttributeReportBind(0),
+    m_manufacturer(""),
+    m_model(""),
+    m_datecode(""),
+    m_sw_version(""),
+    m_debugNode(false),
+    m_debugAll(false)
 {
     QTime t = QTime::currentTime();
 
@@ -393,4 +399,116 @@ const QDateTime &RestNodeBase::lastRx() const
 void RestNodeBase::rx()
 {
     m_lastRx = QDateTime::currentDateTime();
+}
+
+// APIv2
+
+void RestNodeBase::setManufacturerv2(const QString &manufacturer)
+{
+    m_manufacturer = manufacturer;
+}
+
+const QString &RestNodeBase::manufacturerv2() const
+{
+    return m_manufacturer;
+}
+
+void RestNodeBase::setModelIdv2(const QString &modelid)
+{
+    m_model = modelid;
+}
+
+const QString &RestNodeBase::modelIdv2() const
+{
+    return m_model;
+}
+
+void RestNodeBase::setDateCodev2(const QString &datecode)
+{
+    m_datecode = datecode;
+}
+
+const QString &RestNodeBase::dateCodev2() const
+{
+    return m_datecode;
+}
+
+void RestNodeBase::setSwVersionv2(const QString &swversion)
+{
+    m_sw_version = swversion;
+}
+
+const QString &RestNodeBase::swVersionv2() const
+{
+    return m_sw_version;
+}
+
+bool RestNodeBase::isCoordinatorv2() const
+{
+    return m_node->isCoordinator();
+}
+
+bool RestNodeBase::isRouterv2() const
+{
+    return m_node->isRouter();
+}
+
+bool RestNodeBase::isEndDevicev2() const
+{
+    return m_node->isEndDevice();
+}
+
+bool RestNodeBase::isZombiev2() const
+{
+    return m_node->isZombie();
+}
+
+uint16_t RestNodeBase::nwkv2() const
+{
+    return m_node->address().nwk();
+}
+
+uint64_t RestNodeBase::extv2() const
+{
+    return m_node->address().ext();
+}
+
+const std::vector<uint8_t> &RestNodeBase::endpointsv2() const
+{
+    return m_node->endpoints();
+}
+
+const QList<deCONZ::SimpleDescriptor> &RestNodeBase::simpleDescriptorsv2() const
+{
+    return m_node->simpleDescriptors();
+}
+
+const deCONZ::MacCapabilities &RestNodeBase::macCapabilitiesv2() const
+{
+    return m_node->macCapabilities();
+}
+
+const deCONZ::PowerDescriptor &RestNodeBase::powerDescriptorv2() const
+{
+    return m_node->powerDescriptor();
+}
+
+bool RestNodeBase::debugNode() const
+{
+    return m_debugNode;
+}
+
+void RestNodeBase::setDebugNode(bool nodeEnabled)
+{
+    m_debugNode = nodeEnabled;
+}
+
+bool RestNodeBase::debugAll() const
+{
+    return m_debugAll;
+}
+
+void RestNodeBase::setDebugAll(bool allEnabled)
+{
+    m_debugAll = allEnabled;
 }
