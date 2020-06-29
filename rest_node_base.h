@@ -107,12 +107,16 @@ public:
     bool isZombiev2() const;
     const std::vector<uint8_t> &endpointsv2() const;
     const QList<deCONZ::SimpleDescriptor> &simpleDescriptorsv2() const;
-    const deCONZ::MacCapabilities &macCapabilitiesv2() const;
-    const deCONZ::PowerDescriptor &powerDescriptorv2() const;
     bool debugNode() const;
     void setDebugNode(bool nodeEnabled);
     bool debugAll() const;
     void setDebugAll(bool allEnabled);
+    bool isFfdv2() const;
+    bool isMainsPoweredv2() const;
+    bool isReceiverOnWhenIdlev2() const;
+    uint16_t manufacturerCodev2() const;
+    QString namev2() const;
+    void setName(QString deviceName);
 
 private:
     deCONZ::Node *m_node;
@@ -139,6 +143,7 @@ private:
     QString m_sw_version;
     bool m_debugNode;
     bool m_debugAll;
+    QString m_name;
 };
 
 #endif // REST_NODE_BASE_H

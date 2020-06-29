@@ -483,16 +483,6 @@ const QList<deCONZ::SimpleDescriptor> &RestNodeBase::simpleDescriptorsv2() const
     return m_node->simpleDescriptors();
 }
 
-const deCONZ::MacCapabilities &RestNodeBase::macCapabilitiesv2() const
-{
-    return m_node->macCapabilities();
-}
-
-const deCONZ::PowerDescriptor &RestNodeBase::powerDescriptorv2() const
-{
-    return m_node->powerDescriptor();
-}
-
 bool RestNodeBase::debugNode() const
 {
     return m_debugNode;
@@ -511,4 +501,34 @@ bool RestNodeBase::debugAll() const
 void RestNodeBase::setDebugAll(bool allEnabled)
 {
     m_debugAll = allEnabled;
+}
+
+bool RestNodeBase::isFfdv2() const
+{
+    return m_node->nodeDescriptor().isFullFunctionDevice();
+}
+
+bool RestNodeBase::isMainsPoweredv2() const
+{
+    return m_node->nodeDescriptor().isMainsPowered();
+}
+
+bool RestNodeBase::isReceiverOnWhenIdlev2() const
+{
+    return m_node->nodeDescriptor().receiverOnWhenIdle();
+}
+
+uint16_t RestNodeBase::manufacturerCodev2() const
+{
+    return m_node->nodeDescriptor().manufacturerCode();
+}
+
+QString RestNodeBase::namev2() const
+{
+    return m_name;
+}
+
+void RestNodeBase::setName(QString deviceName)
+{
+    m_name = deviceName;
 }
