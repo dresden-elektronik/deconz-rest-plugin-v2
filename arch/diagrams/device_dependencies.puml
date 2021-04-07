@@ -6,6 +6,10 @@ endheader
 
 title Device Dependencies
 
+!include skinparams.txt
+
+hide empty members
+
 class Event
 class Resource
 class ResourceItem
@@ -21,13 +25,13 @@ class deCONZ::Node {
     +deCONZ::SimpleDescriptors
 }
 
-interface "Device Access" as DeviceAccess <<Module>> {
+interface "Device Access" as DeviceAccess << (M,#b4c7d1) >> {
     +DA_GetParseFunction()
     +DA_GetReadFunction()
     +DA_GetWriteFunction()
 }
 
-interface ZDP <<Module>> {
+interface ZDP << (M,#b4c7d1) >> {
     +ZDP_NodeDescriptorReq()
     +ZDP_ActiveEndpointsReq()
     +ZDP_SimpleDescriptorReq()
