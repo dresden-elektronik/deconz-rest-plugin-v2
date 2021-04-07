@@ -1,0 +1,49 @@
+@startuml
+
+header
+Work in progress.
+endheader
+
+title Device Dependencies
+
+class Event
+class Resource
+class ResourceItem
+class Device <<Resource>> {
+	+handleEvent()
+	+eventNotify()
+}
+
+class StateChange
+
+class deCONZ::Node {
+    +deCONZ::NodeDescriptor
+    +deCONZ::SimpleDescriptors
+}
+
+interface "Device Access" as DeviceAccess <<Module>> {
+    +DA_GetParseFunction()
+    +DA_GetReadFunction()
+    +DA_GetWriteFunction()
+}
+
+interface ZDP <<Module>> {
+    +ZDP_NodeDescriptorReq()
+    +ZDP_ActiveEndpointsReq()
+    +ZDP_SimpleDescriptorReq()
+}
+
+
+
+Device --> deCONZ::Node
+Device --> DeviceAccess
+Device --> ZDP
+Device o-- StateChange
+
+Resource <|-- Device
+Resource o-- ResourceItem
+
+caption Class and module dependencies of the Device class
+
+
+@enduml

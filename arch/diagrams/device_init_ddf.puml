@@ -1,0 +1,39 @@
+@startuml
+
+header
+Work in progress.
+endheader
+
+title Device Init via DDF
+
+class Device <<Resource>>
+
+Device : state = DDF
+
+class "DDF Loader" as DeviceDescriptions {
+	+handleEvent()
+}
+
+interface "DDF Init" as DDFInit <<Module>> {
+    +DEV_InitDeviceFromDescription()
+}
+
+interface "Device Compat" as DeviceCompat <<Module>> {
+	+DEV_InitCompatNodeFromDescription()
+}
+
+class Plugin {
+	+DEV_AddResource()
+}
+
+Device --> DeviceDescriptions : Init Request\nEvent
+DeviceDescriptions --> Device : Init Response\nEvent
+
+DeviceDescriptions --> DDFInit : {Device*, DDF}
+
+DDFInit --> DeviceCompat
+DeviceCompat --> Plugin : Add Sensor or LightNode
+
+caption Async execution path when a Device and its\nSub-Devices are initialized from a DDF.
+
+@enduml
