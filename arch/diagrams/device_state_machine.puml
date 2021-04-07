@@ -1,0 +1,40 @@
+@startuml
+hide empty description
+state Init
+state "Node Descriptor" as NodeDescriptor
+state Endpoints as "Endpoints"
+state "Simple Descriptors" as SimpleDescriptors
+state "Basic Cluster" as BasicCluster
+state "Get DDF" as GetDDF
+
+[*] --> Init
+Init --> NodeDescriptor : Reachable or\nHas node Descriptor
+
+NodeDescriptor --> Init : Error
+NodeDescriptor --> Endpoints : Has Node Descriptor
+
+Endpoints --> SimpleDescriptors : Has Active Endpoints
+Endpoints --> Init : Error
+
+SimpleDescriptors --> BasicCluster : Has Simple Descriptors
+SimpleDescriptors --> Init : Error
+
+BasicCluster --> GetDDF
+BasicCluster --> Init : Error
+note bottom of BasicCluster : read common attributes
+
+
+GetDDF --> Init : Not found
+GetDDF --> Operating : Has DDF
+
+state Operating {
+  state Bindings
+  ||
+  state Scenes
+  ||
+  state "Polling"
+}
+
+
+Operating --> Init : Not Reachable
+@enduml
