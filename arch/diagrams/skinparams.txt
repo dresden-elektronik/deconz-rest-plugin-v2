@@ -1,0 +1,9 @@
+
+
+!include skinparams.txt
+
+skinparam ClassFontName Inter
+skinparam ClassAttributeFontname Monospace
+'skinparam ClassBorderColor #1111ff
+skinparam CircledCharacterFontName Inter
+skinparam CircledCharacterFontSize 12

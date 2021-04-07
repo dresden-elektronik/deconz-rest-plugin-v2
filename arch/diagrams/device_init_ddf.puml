@@ -6,19 +6,25 @@ endheader
 
 title Device Init via DDF
 
-class Device <<Resource>>
+!include skinparams.txt
 
-Device : state = DDF
+scale 1.5
+
+hide empty members
+
+class Device
+
+Device : state = Get DDF
 
 class "DDF Loader" as DeviceDescriptions {
 	+handleEvent()
 }
 
-interface "DDF Init" as DDFInit <<Module>> {
+interface "DDF Init" as DDFInit << (M,#b4c7d1) >> {
     +DEV_InitDeviceFromDescription()
 }
 
-interface "Device Compat" as DeviceCompat <<Module>> {
+interface "Device Compat" as DeviceCompat << (M,#b4c7d1) >> {
 	+DEV_InitCompatNodeFromDescription()
 }
 
@@ -26,10 +32,10 @@ class Plugin {
 	+DEV_AddResource()
 }
 
-Device --> DeviceDescriptions : Init Request\nEvent
-DeviceDescriptions --> Device : Init Response\nEvent
+Device -[#444444]down-> DeviceDescriptions : Init Request\nEvent
+DeviceDescriptions -[#444444]up-> Device : Init Response\nEvent
 
-DeviceDescriptions --> DDFInit : {Device*, DDF}
+DeviceDescriptions -right-> DDFInit : {Device*, DDF}
 
 DDFInit --> DeviceCompat
 DeviceCompat --> Plugin : Add Sensor or LightNode
