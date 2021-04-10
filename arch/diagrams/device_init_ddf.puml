@@ -8,7 +8,7 @@ title Device Init via DDF
 
 !include skinparams.txt
 
-scale 1.5
+scale 1.25
 
 hide empty members
 
