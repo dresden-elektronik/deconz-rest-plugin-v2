@@ -37,15 +37,18 @@ interface ZDP << (M,#b4c7d1) >> {
     +ZDP_SimpleDescriptorReq()
 }
 
-
+interface ZCL << (M,#b4c7d1) >> {
+    +ZCL_ReadAttributes()
+}
 
 Device --> deCONZ::Node
 Device --> DeviceAccess
 Device --> ZDP
-Device o-- StateChange
+Device --> ZCL
+Device -> StateChange
 
 Resource <|-- Device
-Resource o-- ResourceItem
+'Resource o-- ResourceItem
 
 caption Class and module dependencies of the Device class
 
