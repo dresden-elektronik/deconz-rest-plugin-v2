@@ -9,7 +9,7 @@ title Device State Node Descriptor
 !include skinparams.txt
 
 hide empty description
-scale 1.25
+scale 1
 
 
 state "Init" as Init
