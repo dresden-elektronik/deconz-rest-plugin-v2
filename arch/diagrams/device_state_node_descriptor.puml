@@ -1,0 +1,47 @@
+@startuml
+
+header
+Work in progress.
+endheader
+
+title Device State Node Descriptor
+
+!include skinparams.txt
+
+hide empty description
+scale 1.25
+
+
+state "Init" as Init
+state "Active Endpoints" as ActiveEndpoints
+
+'Init --> NodeDescriptor
+
+state "Node Descriptor" as NodeDescriptor {
+    state "[Has Node Descriptor]" as CheckNd
+    state "[Is Reachable]" as CheckReachable
+    state "Wait APS Confirm" as WaitConfirm
+    state "Wait ZDP Response" as WaitResponse
+
+    state error <<exitPoint>>
+
+    error --> Init
+
+    [*] --> CheckNd
+    CheckNd -> ActiveEndpoints : Has Node Descriptor
+    CheckNd --> CheckReachable : No Node Descriptor
+    CheckReachable --> error : Not Reachable
+    CheckReachable --> ZdpRequest : Reachable
+    ZdpRequest --> error : Enqueue Failed
+    ZdpRequest --> WaitConfirm : Enqueued
+    WaitConfirm --> error : Confirm Timout\nor Error
+    WaitConfirm --> WaitResponse : Confirm OK
+    WaitResponse ----> Init : OK Recheck
+    WaitResponse --> error : Timeout
+}
+
+
+caption Querying of ZDP Node Descriptor
+
+
+@enduml
