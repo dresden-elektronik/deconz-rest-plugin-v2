@@ -11,18 +11,20 @@ title Binding State Machine
 hide empty description
 scale 1.25
 
-[*] -> Binding
+[*] --> Binding
+Idle --> Binding : ReCheck
+Error --> Binding
 Binding --> TableVerify : Start
-TableVerify --> Binding : Done
-TableVerify --> TableVerify : Ok, Next
-TableVerify --> AddBinding : Missing
+TableVerify --> Idle : Done
 TableVerify --> ReadReportConfig : Stale Reports
-AddBinding --> ReadReportConfig : Ok
-AddBinding --> Binding : Error
-ReadReportConfig --> TableVerify : Error or Done
-ReadReportConfig --> ReadReportConfig : Ok, Next
-ReadReportConfig --> ConfigReporting : Not Found
-ConfigReporting --> ReadReportConfig : Error
+ReadReportConfig --> TableVerify : Config Valid
+TableVerify --> AddBinding : Missing
+AddBinding --> ReadReportConfig : Success
+AddBinding --> Error : Error
+ReadReportConfig --> Error : Error
+ReadReportConfig --> ConfigReporting : Config Invalid
+ConfigReporting --> TableVerify : Ok, Next
+ConfigReporting --> Error : Error
 
 caption Handling of ZDP Binding and ZCL Reporting Configuration
 
